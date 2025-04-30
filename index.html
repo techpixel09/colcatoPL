@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colegio Camilo Torres - El Playón, Santander</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #ffc107;
+            --secondary-color: #0056b3;
+            --accent-color: #28a745;
+            --text-color: #333;
+            --light-gray: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+        
+        /* Eliminamos la clase hidden que estaba causando problemas */
+        /* A cambio, usaremos clases específicas para las animaciones */
+        .animate-fade-in {
+            opacity: 0;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text h1 {
+            color: var(--primary-color);
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1;
+        }
+        
+        .logo-text span {
+            color: var(--text-color);
+            font-size: 14px;
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        nav ul li a:hover::after {
+            width: 80%;
+        }
+        
+        .nav-active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .nav-active::after {
+            width: 80%;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/12.jpeg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 20px;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 10px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--white);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--white);
+            color: var(--primary-color);
+        }
+        
+        /* Scroll Down Animation */
+        .scroll-down {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            color: var(--white);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        /* About Section */
+        .section {
+            padding: 80px 5%;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-image {
+            flex: 1;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .about-content {
+            flex: 1;
+        }
+        
+        .about-content h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .about-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            text-align: justify;
+        }
+        
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-item i {
+            font-size: 24px;
+            color: var(--secondary-color);
+        }
+        
+        /* Programs Section */
+        .bg-light {
+            background-color: var(--light-gray);
+        }
+        
+        .programs-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .program-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Eliminamos la opacidad oculta para asegurar que se muestren */
+            opacity: 1;
+        }
+        
+        .program-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .program-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .program-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .program-card:hover .program-image img {
+            transform: scale(1.1);
+        }
+        
+        .program-content {
+            padding: 20px;
+        }
+        
+        .program-content h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .program-content p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .read-more {
+            display: inline-block;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .read-more i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .read-more:hover {
+            color: var(--accent-color);
+        }
+        
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Testimonials Section */
+        .testimonials-container {
+            position: relative;
+            padding: 0 30px;
+        }
+        
+        .swiper-container {
+            padding: 30px 0;
+        }
+        
+        .testimonial-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .testimonial-card::before {
+            content: '\201C';
+            position: absolute;
+            top: -30px;
+            left: 20px;
+            font-size: 150px;
+            color: rgba(0, 86, 179, 0.1);
+            font-family: serif;
+            z-index: -1;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 20px;
+            line-height: 1.7;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--primary-color);
+        }
+        
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        .author-info span {
+            font-size: 14px;
+            color: #777;
+        }
+        
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--primary-color);
+        }
+        
+        /* Gallery Section */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 10px;
+            position: relative;
+            height: 250px;
+            cursor: pointer;
+            /* Aseguramos que todos los items son visibles */
+            opacity: 1;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .gallery-overlay h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .gallery-overlay p {
+            font-size: 14px;
+        }
+        
+        .gallery-overlay i {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .view-more-btn {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .contact-item i {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-top: 5px;
+        }
+        
+        .contact-text h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        .contact-text p, .contact-text a {
+            line-height: 1.6;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-text a:hover {
+            color: var(--primary-color);
+        }
+        
+        .map-container {
+            height: 100%;
+            min-height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: var(--white);
+        }
+        
+        .footer-top {
+            padding: 60px 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-links a i {
+            font-size: 14px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+        
+        .footer-contact p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .footer-contact p i {
+            color: var(--secondary-color);
+            font-size: 18px;
+            margin-top: 3px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 20px 5%;
+            text-align: center;
+        }
+        
+        .footer-bottom p {
+            font-size: 14px;
+        }
+        
+        /* Mejorados los estilos para el menú móvil */
+        @media screen and (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 0;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav ul li {
+                width: 100%;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 15px 20px;
+                text-align: center;
+                border-bottom: 1px solid #f1f1f1;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+        }
+        
+        /* Responsive Styles */
+        @media screen and (max-width: 992px) {
+            .header-container {
+                padding: 15px 3%;
+            }
+            
+            .section {
+                padding: 60px 3%;
+            }
+            
+            .about-container {
+                flex-direction: column;
+            }
+            
+            .gallery-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+            
+            .section-title h2 {
+                font-size: 30px;
+            }
+            
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media screen and (max-width: 576px) {
+            .logo-text h1 {
+                font-size: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Estilos para el lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .lightbox img {
+            max-width: 100%;
+            max-height: 80vh;
+            border: 5px solid white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .close-lightbox {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .lightbox-caption {
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .lightbox-caption h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="Colcato.gif" alt="Logo Colegio Camilo Torres">
+                <div class="logo-text">
+                    <h1>Colegio Camilo Torres</h1>
+                    <span>El Playón, Santander</span>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-active">Inicio</a></li>
+                    <li><a href="#about">Sobre Nosotros</a></li>
+                    <li><a href="#programs">Programas</a></li>
+                    <li><a href="#testimonials"></a></li>
+                    <li><a href="#gallery">Galería</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Formando el futuro de El Playón</h1>
+            <p>Colegio Camilo Torres, una institución comprometida con la excelencia académica y la formación integral de nuestros estudiantes en Santander.</p>
+            <div class="hero-buttons">
+                <a href="#programs" class="btn btn-primary">Conoce nuestros programas</a>
+                <a href="#contact" class="btn btn-secondary">Contáctanos</a>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="section-title">
+            <h2>Sobre Nosotros</h2>
+        </div>
+        <div class="about-container">
+            <div class="about-image animate-fade-in">
+                <img src="port.jpeg" alt="Colegio Camilo Torres">
+            </div>
+            <div class="about-content animate-fade-in">
+                <h3>Educación de calidad en El Playón</h3>
+                <p>El Colegio Camilo Torres es una institución educativa comprometida con la formación integral de niños y jóvenes del municipio de El Playón, Santander. Con una trayectoria de excelencia, nos enfocamos en desarrollar habilidades académicas, valores y competencias para la vida.</p>
+                <p>Nuestra filosofía educativa se basa en el respeto, la responsabilidad y el compromiso con la comunidad. Preparamos a nuestros estudiantes para enfrentar los desafíos del futuro con pensamiento crítico y capacidad de liderazgo.</p>
+                <div class="about-features">
+                    <div class="feature-item">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Excelencia académica</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-users"></i>
+                        <span>Formación en valores</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-laptop"></i>
+                        <span>Tecnología educativa</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-futbol"></i>
+                        <span>Actividades deportivas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programs Section -->
+     <section class="section bg-light" id="programs">
+        <div class="section-title">
+            <h2>Programas Académicos</h2>
+        </div>
+        <div class="programs-container">
+            <div class="program-card animate-fade-in">
+                <div class="program-image">
+                    <img src="/api/placeholder/400/250" alt="Preescolar">
+                </div>
+                <div class="program-content">
+                    <h3>Preescolar</h3>
+                    <p>Brindamos un ambiente seguro y estimulante para el desarrollo inicial de habilidades cognitivas, socioemocionales y motoras en los más pequeños.</p>
+                    <a href="#" class="read-more">Leer más <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="program-card animate-fade-in">
+                <div class="program-image">
+                    <img src="/api/placeholder/400/250" alt="Primaria">
+                </div>
+                <div class="program-content">
+                    <h3>Primaria</h3>
+                    <p>Educación básica de calidad que sienta las bases del conocimiento y promueve la curiosidad, creatividad y autonomía en los estudiantes.</p>
+                    <a href="#" class="read-more">Leer más <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="program-card animate-fade-in">
+                <div class="program-image">
+                    <img src="2.jpeg" alt="Secundaria y Media">
+                </div>
+                <div class="program-content">
+                    <h3>Secundaria y Media</h3>
+                    <p>Formación integral que prepara a nuestros estudiantes para la educación superior y la vida profesional con sólidos conocimientos y valores.</p>
+                    <a href="#" class="read-more">Leer más <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Gallery Section -->
+    <section class="section bg-light" id="gallery">
+        <div class="section-title">
+            <h2>Galería</h2>
+        </div>
+        <div class="gallery-container">
+            <div class="gallery-item animate-fade-in">
+                <img src="/api/placeholder/400/250" alt="Instalaciones">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                    <h4>Instalaciones</h4>
+                    <p>Espacios modernos y cómodos para el aprendizaje</p>
+                </div>
+            </div>
+            <div class="gallery-item animate-fade-in">
+                <img src="/api/placeholder/400/250" alt="Actividades Deportivas">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                    <h4>Actividades Deportivas</h4>
+                    <p>Fomentando el desarrollo físico y trabajo en equipo</p>
+                </div>
+            </div>
+            <div class="gallery-item animate-fade-in">
+                <img src="/api/placeholder/400/250" alt="Laboratorio">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                    <h4>Laboratorio</h4>
+                    <p>Aprendizaje práctico y experimental</p>
+                </div>
+            </div>
+            <div class="gallery-item animate-fade-in">
+                <img src="/api/placeholder/400/250" alt="Actividades Culturales">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                    <h4>Actividades Culturales</h4>
+                    <p>Celebrando nuestra identidad y tradiciones</p>
+                </div>
+            </div>
+            <div class="gallery-item animate-fade-in">
+                <img src="/api/placeholder/400/250" alt="Biblioteca">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                    <h4>Biblioteca</h4>
+                    <p>Un espacio para descubrir el conocimiento</p>
+                </div>
+            </div>
+            <div class="gallery-item animate-fade-in">
+                <img src="/api/placeholder/400/250" alt="Actos Académicos">
+                <div class="gallery-overlay">
+                    <i class="fas fa-search-plus"></i>
+                    <h4>Actos Académicos</h4>
+                    <p>Reconociendo la excelencia de nuestros estudiantes</p>
+                </div>
+            </div>
+        </div>
+        <div class="view-more-btn">
+            <a href="#" class="btn btn-primary">Ver más fotos</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="section-title">
+            <h2>Contáctanos</h2>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="contact-text">
+                        <h4>Dirección</h4>
+                        <p>Calle Principal #123, El Playón, Santander, Colombia</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div class="contact-text">
+                        <h4>Teléfono</h4>
+                        <p><a href="tel:+576076547890">607-654-7890</a></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div class="contact-text">
+                        <h4>Email</h4>
+                        <p><a href="mailto:info@colegiocamilotorres.edu.co">info@colegiocamilotorres.edu.co</a></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <div class="contact-text">
+                        <h4>Horario de Atención</h4>
+                        <p>Lunes a Viernes: 7:00 AM - 4:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15866.918909376568!2d-73.2103899!3d7.4706699!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e68e7336edc1c9f%3A0xf8e3c3a832c83038!2sEl%20Play%C3%B3n%2C%20Santander!5e0!3m2!1ses!2sco!4v1650987654321!5m2!1ses!2sco" allowfullscreen="" loading="lazy"></iframe>        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-column">
+                <h3>Colegio Camilo Torres</h3>
+                <p>Formando a los líderes del mañana con principios, valores y excelencia académica en el corazón de El Playón, Santander.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Enlaces Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+                    <li><a href="#about"><i class="fas fa-chevron-right"></i> Sobre Nosotros</a></li>
+                    <li><a href="#programs"><i class="fas fa-chevron-right"></i> Programas</a></li>
+                    <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Testimonios</a></li>
+                    <li><a href="#gallery"><i class="fas fa-chevron-right"></i> Galería</a></li>
+                    <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Información Útil</h3>
+                <ul class="footer-links">
+                    <li><a href="calendarrio.html"><i class="fas fa-chevron-right"></i> Calendario Académico</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Noticias y Eventos</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i>Gestion Gobierno Escolar</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contáctanos</h3>
+                <div class="footer-contact">
+                    <p><i class="fas fa-map-marker-alt"></i> CRA 6 EN ENTRE CALLES 8 Y 9,El Playon Santander, Colombia</p>
+                    <p><i class="fas fa-phone-alt"></i> 607-654-7890</p>
+                    <p><i class="fas fa-envelope"></i> info@colegiocamilotorres.edu.co</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Colegio Camilo Torres - El Playón, Santander. Todos los derechos reservados.</p>
+            <p>Desarrolado por TECHPIXELC</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox">
+        <div class="lightbox-content">
+            <span class="close-lightbox">&times;</span>
+            <img src="" alt="Lightbox Image">
+            <div class="lightbox-caption">
+                <h3></h3>
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navMenu = document.querySelector('nav ul');
+        
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Initialize Swiper
+        const swiper = new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 30,
+                },
+                992: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                }
+            }
+        });
+        
+        // Scroll Animation
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.classList.toggle('scrolled', window.scrollY > 50);
+            
+            const animateElements = document.querySelectorAll('.animate-fade-in');
+            animateElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < window.innerHeight - elementVisible) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                }
+            });
+        });
+        
+        // Lightbox Functionality
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxImg = document.querySelector('.lightbox img');
+        const lightboxTitle = document.querySelector('.lightbox-caption h3');
+        const lightboxDesc = document.querySelector('.lightbox-caption p');
+        const closeLightbox = document.querySelector('.close-lightbox');
+        
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgSrc = item.querySelector('img').getAttribute('src');
+                const title = item.querySelector('.gallery-overlay h4').textContent;
+                const desc = item.querySelector('.gallery-overlay p').textContent;
+                
+                lightboxImg.setAttribute('src', imgSrc);
+                lightboxTitle.textContent = title;
+                lightboxDesc.textContent = desc;
+                lightbox.classList.add('active');
+            });
+        });
+        
+        closeLightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+        
+        // Scroll to sections smoothly
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
